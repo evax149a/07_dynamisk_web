@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script>
+        let person = [{
+            "fornavn": "Martin",
+            "efternavn": "Bregnhøi",
+            "email": "mabe@kea.dk"
+        }, {
+            "fornavn": "Martine",
+            "efternavn": "Bregnhøia",
+            "email": "mabe@kea.dk"
+        }, {
+            "fornavn": "Martiner",
+            "efternavn": "Bregnhøio",
+            "email": "mabe@kea.dk"
+        }, {
+            "fornavn": "Martinerer",
+            "efternavn": "Bregnhøiy",
+            "email": "mabe@kea.dk"
+        }];
+
+
+        let navn = `Navn: ${person[3].fornavn} ${person[1].efternavn}`;
+        console.log(navn);
+
+        person.forEach((person, index, arr) => {
+            console.log(person, index, arr);
+
+        });
+
+
+        //        let person = {
+        //            "fornavn": "Martin",
+        //            "efternavn": "Bregnhøi",
+        //            "email": "mabe@kea.dk"
+        //        };
+        //
+        //        let navn = person.fornavn + person.efternavn;
+        //        console.log(navn);
+    </script>
+</body></html>
