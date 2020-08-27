@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         img {
             width: 100%;
         }
@@ -33,20 +37,24 @@
 
         .type,
         .levested {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
         }
 
         @media (min-width: 500px) {
             .dyr {
-                /*                width: 50%;*/
-                /*                flex: 0 50%;*/
-                flex-grow: 2;
-                flex-basis: 200px;
+                width: 50%;
             }
 
             .data-container {
                 flex-direction: row;
                 flex-wrap: wrap;
+            }
+        }
+
+
+        @media (min-width: 900px) {
+            .dyr {
+                width: 33.33%;
             }
         }
     </style>
