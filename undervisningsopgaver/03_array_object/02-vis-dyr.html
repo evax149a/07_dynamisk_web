@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <article></article>
+    <script>
+        // Lav et tomt article-tag i DOM’en, som du kan bruge til at vise informationerne om dyret.
+        //● I scriptet skal du starte med at lave en eventlistener på, om DOM-indholdet er loaded (article-tagget skal være læst ind).
+
+        window.addEventListener("DOMContentLoaded", start);
+
+        //● Dét, du i 01-objekt.html udskrev i console.log, skal du nu udskrive i article-tagget.
+
+        function start() {
+            console.log("Loaded!");
+
+            const article = document.querySelector("article");
+
+            let dyr = {
+                "navn": "gris",
+                "type": "pattedyr",
+                "billede": "http://mabe-kea.dk/E19/pics/pig.png",
+                "levested": "svinefarme"
+            };
+
+            let p = document.createElement("p");
+            let tekst = document.createTextNode(`Dyr: ${dyr.navn}, Type: ${dyr.type}, Levested: ${dyr.levested}`);
+            p.appendChild(tekst);
+
+            article.appendChild(p);
+
+
+            //● Vis også billedet i article-tagget. Placer det under teksten.
+
+            let img = document.createElement("img");
+            img.src = dyr.billede;
+
+            article.appendChild(img);
+        }
+    </script>
+</body></html>
