@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <script>
+        // Lav et tomt article-tag i DOM’en, som du kan bruge til at vise informationerne om dyret.
+        //● I scriptet skal du starte med at lave en eventlistener på, om DOM-indholdet er loaded (article-tagget skal være læst ind).
+
+        window.addEventListener("DOMContentLoaded", start);
+
+        //● Dét, du i 01-objekt.html udskrev i console.log, skal du nu udskrive i article-tagget.
+
+        function start() {
+            console.log("Loaded!");
+
+            let dyr = [
+
+                {
+                    "navn": "Gris",
+                    "type": "pattedyr",
+                    "billede": "http://mabe-kea.dk/E19/pics/pig.png",
+                    "levested": "svinefarme"
+                },
+
+                {
+                    "navn": "Frø",
+                    "type": "amfibie",
+                    "billede": "http://mabe-kea.dk/E19/pics/frog.png",
+                    "levested": "søen"
+                },
+
+                {
+                    "navn": "Ræv",
+                    "type": "pattedyr",
+                    "billede": "http://mabe-kea.dk/E19/pics/fox.png",
+                    "levested": "Skoven"
+                },
+
+                {
+                    "navn": "Sild",
+                    "type": "fisk",
+                    "billede": "http://mabe-kea.dk/E19/pics/sild.png",
+                    "levested": "svinefarme"
+                },
+
+                {
+                    "navn": "Krokodille",
+                    "type": "krybdyr",
+                    "billede": "http://mabe-kea.dk/E19/pics/kroko.png",
+                    "levested": "Sump"
+                }
+            ];
+
+            console.log(dyr);
+
+        }
+    </script>
+</body></html>
