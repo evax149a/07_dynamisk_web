@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .data-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dyr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            border: 2px dotted darkblue;
+            padding: 30px;
+        }
+
+        .navn {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .type,
+        .levested {
+            font-size: 1.7rem;
+        }
+
+        @media (min-width: 500px) {
+            .dyr {
+                width: 50%;
+            }
+
+            .data-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+
+        @media (min-width: 900px) {
+            .dyr {
+                width: 33.33%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="data-container"></section>
+
+    <template>
+        <article class="dyr">
+            <h3 class="navn"></h3>
+            <img class="billede" src="" alt="">
+            <p class="type"> Type: </p>
+            <p class="levested"> Levested: </p>
+        </article>
+    </template>
+
+
+    <script>
+        window.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("Loaded!");
+
+            const dataContainer = document.querySelector(".data-container");
+            const petTemplate = document.querySelector("template");
+
+            async function hentData() {
+                const response = await fetch("alle-dyr.json");
+                const json = await response.json();
+                vis(json);
+                console.log(json[2].navn);
+            }
+
+            function vis(json) {
+                json.forEach(dyr => {
+                    let templateClone = petTemplate.cloneNode(true).content;
+
+                    templateClone.querySelector(".navn").textContent = dyr.navn;
+                    templateClone.querySelector(".type").textContent += dyr.type;
+                    templateClone.querySelector(".levested").textContent += dyr.levested;
+                    templateClone.querySelector(".billede").src = dyr.billede;
+                    templateClone.querySelector(".billede").alt = dyr.navn;
+
+                    dataContainer.appendChild(templateClone);
+                });
+            }
+
+            hentData();
+
+        }
+    </script>
+</body></html>
