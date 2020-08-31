@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        body {
+            background-color: rgba(171, 189, 195, 0.22);
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .valgt {
+            background-color: darkblue;
+            color: aquamarine;
+        }
+
+
+        #list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 70px;
+            padding: 70px;
+
+            max-width: 1200px;
+            margin: 0 auto;
+
+        }
+
+        .person {
+            display: grid;
+            align-items: center;
+
+            text-align: center;
+            border: 2px solid darkblue;
+            box-shadow: 3px 3px #483ca8, 6px 5px 1px #2996f5, 10px 8px 6px rgba(0, 255, 255, 0.8);
+            padding: 30px;
+            background-color: azure;
+        }
+
+        .navn {
+            font-size: 2.8rem;
+            font-weight: 800;
+            font-family: sans-serif;
+            color: #483ca8;
+            text-shadow: 3px 1px 1px #2996f5, 5px 3px 3px rgba(0, 255, 255, 0.44);
+        }
+
+        .religion,
+        .hobby {
+            font-size: 1.5rem;
+            font-family: sans-serif;
+            font-style: italic;
+            color: #335657;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter" data-køn="k">Kvinder</button>
+        <button class="filter" data-køn="andet">Andet</button>
+    </header>
+
+    <section id="list"></section>
+
+
+    <template>
+        <article class="person">
+            <h3 class="navn"></h3>
+            <img class="billede" src="" alt="">
+            <p class="religion">Religion: </p>
+            <p class="hobby">Hobby: </p>
+        </article>
+    </template>
+
+
+    <script>
+        let personer;
+        let filter = "alle";
+        document.addEventListener("DOMContentLoaded", loadJSON);
+
+        async function loadJSON() {
+            console.log("load json");
+            const JSONData = await fetch("https://spreadsheets.google.com/feeds/list/1mtHhpoEkYqVqr1TSnKQ1_sQZWI7FRVjcw3H1oatDOVQ/od6/public/values?alt=json");
+            personer = await JSONData.json();
+            addEventlistenersToButtons();
+            visPersoner();
+        }
+
+
+        function visPersoner() {
+            console.log("viser personer");
+            const templatePointer = document.querySelector("template");
+            const listPointer = document.querySelector("#list");
+            listPointer.innerHTML = "";
+
+            personer.feed.entry.forEach(person => {
+                if (filter == person.gsx$køn.$t) {
+                    console.log(person);
+                    const minKlon = templatePointer.cloneNode(true).content;
+                    minKlon.querySelector(".navn").textContent = person.gsx$navn.$t;
+                    minKlon.querySelector(".billede").src = person.gsx$billede.$t;
+                    minKlon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
+                    minKlon.querySelector(".religion").textContent += person.gsx$religion.$t;
+
+                    listPointer.appendChild(minKlon);
+                }
+            });
+        }
+
+        function addEventlistenersToButtons() {
+            document.querySelectorAll(".filter").forEach(btn => {
+                btn.addEventListener("click", filterBtns);
+            });
+        }
+
+        function filterBtns() {
+            filter = this.dataset.køn;
+            visPersoner();
+
+            console.log(filter);
+        }
+    </script>
+</body></html>

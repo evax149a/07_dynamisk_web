@@ -58,7 +58,6 @@
             font-style: italic;
             color: #335657;
         }
-
     </style>
 </head>
 
@@ -84,7 +83,7 @@
 
             const dataContainer = document.querySelector(".data-container");
             const personTemplate = document.querySelector("template");
-            const googleSheetLink = "https://spreadsheets.google.com/feeds/list/1mtHhpoEkYqVqr1TSnKQ1_sQZWI7FRVjcw3H1oatDOVQ/od6/public/values?alt=json"
+            const googleSheetLink = "https://spreadsheets.google.com/feeds/list/1mtHhpoEkYqVqr1TSnKQ1_sQZWI7FRVjcw3H1oatDOVQ/od6/public/values?alt=json";
 
             async function hentData() {
                 const response = await fetch(googleSheetLink);
@@ -110,8 +109,5 @@
             hentData();
 
         }
-
     </script>
-</body>
-
-</html>
+</body></html>
