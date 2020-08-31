@@ -58,6 +58,7 @@
             font-style: italic;
             color: #335657;
         }
+
     </style>
 </head>
 
@@ -96,7 +97,6 @@
                 json.feed.entry.forEach(person => {
                     let templateClone = personTemplate.cloneNode(true).content;
 
-                    //                    templateClone.querySelector(".navn").textContent = `${person.gsx$navn.$t} ${person.gsx$efternavn.$t}`;
                     templateClone.querySelector(".navn").innerHTML = `${person.gsx$navn.$t} <br> ${person.gsx$efternavn.$t}`;
                     templateClone.querySelector(".religion").textContent += person.gsx$religion.$t;
                     templateClone.querySelector(".hobby").textContent += person.gsx$hobby.$t;
@@ -110,5 +110,8 @@
             hentData();
 
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
