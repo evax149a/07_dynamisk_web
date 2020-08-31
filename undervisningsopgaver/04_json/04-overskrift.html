@@ -130,6 +130,7 @@
                 if (filter == "alle" || filter == person.gsx$køn.$t) {
                     console.log(person);
                     const minKlon = templatePointer.cloneNode(true).content;
+
                     minKlon.querySelector(".navn").textContent = person.gsx$navn.$t;
                     minKlon.querySelector(".billede").src = person.gsx$billede.$t;
                     minKlon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
