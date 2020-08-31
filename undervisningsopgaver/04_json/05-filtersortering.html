@@ -87,7 +87,7 @@
 
     <h1 class="navn">Alle</h1>
     <header>
-        <button class="filter valgt" data-køn="alle">Alle</button>
+        <!--        <button class="filter valgt" data-køn="alle">Alle</button>-->
         <button class="filter" data-køn="m">Mænd</button>
         <button class="filter" data-køn="k">Kvinder</button>
         <button class="filter" data-køn="andet">Andet</button>
@@ -108,7 +108,10 @@
 
     <script>
         let personer;
-        let filter = "alle";
+        let filterMænd = "m";
+        let filterKvinder = "k";
+        let filterAndet = "andet";
+
         document.addEventListener("DOMContentLoaded", loadJSON);
 
         async function loadJSON() {
@@ -127,7 +130,7 @@
             listPointer.innerHTML = "";
 
             personer.feed.entry.forEach(person => {
-                if (filter == "alle" || filter == person.gsx$køn.$t) {
+                if (filterMænd == person.gsx$køn.$t || filterKvinder == person.gsx$køn.$t || filterAndet == person.gsx$køn.$t) {
                     console.log(person);
                     const minKlon = templatePointer.cloneNode(true).content;
                     minKlon.querySelector(".navn").textContent = person.gsx$navn.$t;
@@ -150,10 +153,16 @@
             filter = this.dataset.køn;
             document.querySelector("h1").textContent = this.textContent;
             document.querySelectorAll(".filter").forEach((btn) => {
-                btn.classList.remove("valgt");
+                //                btn.classList.remove("valgt");
             });
 
-            this.classList.add("valgt");
+            if (this.classList.contains("valgt")) {
+                this.classList.remove("valgt");
+            } else {
+                this.classList.add("valgt");
+            }
+
+
 
             visPersoner();
 
