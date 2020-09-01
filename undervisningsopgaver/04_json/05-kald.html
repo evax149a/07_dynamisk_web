@@ -58,7 +58,7 @@
 
             text-align: center;
             border: 2px solid darkblue;
-            box-shadow: 3px 3px #483ca8, 6px 5px 1px #2996f5, 10px 8px 6px rgba(0, 255, 255, 0.8);
+            box-shadow: 3px 3px #483ca8, 6px 5px 1px #2996f5;
             padding: 30px;
             background-color: azure;
         }
@@ -134,7 +134,6 @@
             padding: 40px;
         }
 */
-
     </style>
 </head>
 
@@ -185,7 +184,7 @@
     <script>
         let personer;
         let filter = "alle";
-        const popUpContainer = document.querySelector("#pop-up");
+        //        const popUpContainer = document.querySelector("#pop-up");
         document.addEventListener("DOMContentLoaded", loadJSON);
 
         async function loadJSON() {
@@ -213,29 +212,35 @@
                     minKlon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
                     minKlon.querySelector(".religion").textContent += person.gsx$religion.$t;
 
-                    minKlon.querySelector(".person").addEventListener("click", () => visDetaljerIPopUp(person));
+                    //                                        minKlon.querySelector(".person").addEventListener("click", () => visDetaljerIPopUp(person));
+                    minKlon.querySelector(".person").addEventListener("click", () => visDetaljerISeperatVindue(person));
 
                     listPointer.appendChild(minKlon);
                 }
             });
         }
 
-        function visDetaljerIPopUp(person) {
-            popUpContainer.querySelector(".pop-up-navn").textContent = `${person.gsx$navn.$t} ${person.gsx$efternavn.$t}`;
-            popUpContainer.querySelector(".pop-up-billede").src = person.gsx$billede.$t;
-            popUpContainer.querySelector(".pop-up-beskrivelse-alder").textContent = `Alder: ${person.gsx$alder.$t}`;
-            popUpContainer.querySelector(".pop-up-beskrivelse-religion").textContent = `Religion: ${person.gsx$religion.$t}`;
-            popUpContainer.querySelector(".pop-up-beskrivelse-hobby").textContent = `Hobby: ${person.gsx$hobby.$t}`;
-            popUpContainer.querySelector(".pop-up-beskrivelse-kæledyr").textContent = `Kæledyr: ${person.gsx$kæledyr.$t}`;
-            popUpContainer.querySelector(".pop-up-beskrivelse-job").textContent = `Job: ${person.gsx$job.$t}`;
-            popUpContainer.querySelector(".pop-up-beskrivelse-bopæl").textContent = `Bopæl: ${person.gsx$by.$t} i ${person.gsx$land.$t}`;
-
-
-            popUpContainer.style.display = "block";
+        function visDetaljerISeperatVindue(person) {
+            location.href = `06-detalje.html?id=${person.gsx$id.$t}`;
         }
 
-        document.querySelector("#luk-knap").addEventListener("click", () => popUpContainer.style.display = "none");
-        document.querySelector("#pop-up").addEventListener("click", () => popUpContainer.style.display = "none");
+        //
+        //        function visDetaljerIPopUp(person) {
+        //            popUpContainer.querySelector(".pop-up-navn").textContent = `${person.gsx$navn.$t} ${person.gsx$efternavn.$t}`;
+        //            popUpContainer.querySelector(".pop-up-billede").src = person.gsx$billede.$t;
+        //            popUpContainer.querySelector(".pop-up-beskrivelse-alder").textContent = `Alder: ${person.gsx$alder.$t}`;
+        //            popUpContainer.querySelector(".pop-up-beskrivelse-religion").textContent = `Religion: ${person.gsx$religion.$t}`;
+        //            popUpContainer.querySelector(".pop-up-beskrivelse-hobby").textContent = `Hobby: ${person.gsx$hobby.$t}`;
+        //            popUpContainer.querySelector(".pop-up-beskrivelse-kæledyr").textContent = `Kæledyr: ${person.gsx$kæledyr.$t}`;
+        //            popUpContainer.querySelector(".pop-up-beskrivelse-job").textContent = `Job: ${person.gsx$job.$t}`;
+        //            popUpContainer.querySelector(".pop-up-beskrivelse-bopæl").textContent = `Bopæl: ${person.gsx$by.$t} i ${person.gsx$land.$t}`;
+        //
+        //
+        //            popUpContainer.style.display = "block";
+        //        }
+
+        //        document.querySelector("#luk-knap").addEventListener("click", () => popUpContainer.style.display = "none");
+        //        document.querySelector("#pop-up").addEventListener("click", () => popUpContainer.style.display = "none");
 
         function addEventlistenersToButtons() {
             document.querySelectorAll(".filter").forEach(btn => {
@@ -256,8 +261,5 @@
 
             console.log(filter);
         }
-
     </script>
-</body>
-
-</html>
+</body></html>
