@@ -13,7 +13,7 @@
         }
 
         img {
-            width: 100%;
+            max-width: 100%;
         }
 
         body {
@@ -81,6 +81,44 @@
             color: #335657;
         }
 
+        #pop-up {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            background-color: rgba(0, 0, 255, 0.8);
+        }
+
+        /*
+        #pop-up.is-visible {
+            display: block;
+        }
+*/
+
+        #pop-up article {
+            width: 50vw;
+            height: 50vw;
+            margin: 2vw auto;
+            padding: 100px;
+            background-color: #c9e6ff;
+            position: relative;
+        }
+
+        #luk-knap {
+            position: absolute;
+            top: 0.5vw;
+            right: 1vw;
+        }
+
+        .pop-up-beskrivelse {
+            display: flex;
+        }
+
+        .column {
+            padding: 40px;
+        }
     </style>
 </head>
 
@@ -88,7 +126,7 @@
 
     <h1 class="navn">Alle</h1>
     <header>
-        <!--        <button class="filter valgt" data-køn="alle">Alle</button>-->
+        <button class="filter valgt" data-køn="alle">Alle</button>
         <button class="filter" data-køn="m">Mænd</button>
         <button class="filter" data-køn="k">Kvinder</button>
         <button class="filter" data-køn="andet">Andet</button>
@@ -106,13 +144,29 @@
         </article>
     </template>
 
+    <section id="pop-up">
+        <article>
+            <button id="luk-knap">X</button>
+            <h2 class="pop-up-navn">Fornavn Efternavn</h2>
+            <img class="pop-up-billede" src="lunknepandekager-sm.jpg" alt="">
+            <div class="pop-up-beskrivelse">
+                <div class="column">
+                    <p class="pop-up-beskrivelse-alder">Alder: </p>
+                    <p class="pop-up-beskrivelse-religion">Religion: </p>
+                    <p class="pop-up-beskrivelse-hobby">Hobby: </p>
+                </div>
+                <div class="column">
+                    <p class="pop-up-beskrivelse-kæledyr">Kæledyr: </p>
+                    <p class="pop-up-beskrivelse-job">Job: </p>
+                    <p class="pop-up-beskrivelse-bopæl">Bopæl: </p>
+                </div>
+            </div>
+        </article>
+    </section>
 
     <script>
         let personer;
-        let filterMænd = "m";
-        let filterKvinder = "k";
-        let filterAndet = "andet";
-
+        let filter = "alle";
         document.addEventListener("DOMContentLoaded", loadJSON);
 
         async function loadJSON() {
@@ -131,9 +185,10 @@
             listPointer.innerHTML = "";
 
             personer.feed.entry.forEach(person => {
-                if (filterMænd == person.gsx$køn.$t || filterKvinder == person.gsx$køn.$t || filterAndet == person.gsx$køn.$t) {
+                if (filter == "alle" || filter == person.gsx$køn.$t) {
                     console.log(person);
                     const minKlon = templatePointer.cloneNode(true).content;
+
                     minKlon.querySelector(".navn").textContent = person.gsx$navn.$t;
                     minKlon.querySelector(".billede").src = person.gsx$billede.$t;
                     minKlon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
@@ -154,21 +209,14 @@
             filter = this.dataset.køn;
             document.querySelector("h1").textContent = this.textContent;
             document.querySelectorAll(".filter").forEach((btn) => {
-                //                btn.classList.remove("valgt");
+                btn.classList.remove("valgt");
             });
 
-            if (this.classList.contains("valgt")) {
-                this.classList.remove("valgt");
-            } else {
-                this.classList.add("valgt");
-            }
+            this.classList.add("valgt");
 
             visPersoner();
 
             console.log(filter);
         }
-
     </script>
-</body>
-
-</html>
+</body></html>
